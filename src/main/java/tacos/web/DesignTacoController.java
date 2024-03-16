@@ -1,12 +1,9 @@
-package tacos;
+package tacos.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +11,8 @@ import java.util.stream.Collectors;
 
 import tacos.Ingredient;
 import tacos.Ingredient.Type;
+import tacos.Taco;
+import tacos.TacoOrder;
 
 /*Аннотация @Slf4j из lombok для логирования
 * */
@@ -32,6 +31,10 @@ import tacos.Ingredient.Type;
 @SessionAttributes("tacoOrder")
 public class DesignTacoController {
 
+    /*
+    *Аннотациая @ModelAttribute позволяет связывать поля объектов модели
+    * с элементами формы(View)
+    * */
     @ModelAttribute
     public void addIngredientsToModel(Model model){
         List<Ingredient> ingredients = Arrays.asList(
@@ -67,6 +70,19 @@ public class DesignTacoController {
     @GetMapping
     public String showDesignForm(){
         return "design";
+    }
+
+    @PostMapping
+    public String processTaco(Taco taco,
+                                    /*
+                                    * Тег @ModelAttribute перед параметром указывает, что
+                                    * он должен использовать объект объект tacoOrder, который
+                                    * был помещен в модель методом order() с аннотацией @ModelAttribute
+                                    * */
+                                    @ModelAttribute TacoOrder tacoOrder){
+        tacoOrder.addTaco(taco);
+        log.info("Processing taco: {}", taco);
+        return "redirect:/orders/current";
     }
     private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type){
         return ingredients
