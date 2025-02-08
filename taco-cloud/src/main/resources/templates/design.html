@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Taco Cloud</title>
+  
+</head>
+<body>
+ 	<h1 align="center">Design tour taco!</h1>
+	<p align="center">
+	<img th:src="@{/images/TacoCloud.png}" width="320" height="320" />
+	</p>
+	
+	<form method ="POST", th:object="${taco}">
+		
+		<div>
+			<h3>Name your creation</h3>
+			<input th:field="*{name}" type = "text"/>
+			<button>SUBMIT</button>
+		</div>
+		
+		<div>
+			<div>
+				<h3>Designate your warp</h3>
+				<div th:each="ingridient:${wrap}">
+					<input th:field="*{ingridients}" type = "checkbox"
+						th:value="${ingridient.id}"/>
+					<span th:text="${ingridient.name}">ING</span>
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<div>
+				<h3>Pick your protein</h3>
+				<div th:each="ingridient:${protein}">
+					<input th:field="*{ingridients}" type = "checkbox"
+						th:value="${ingridient.id}"/>
+					<span th:text="${ingridient.name}">ING</span>
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<div>
+				<h3>Choose your cheese</h3>
+				<div th:each="ingridient:${cheese}">
+					<input th:field="*{ingridients}" type = "checkbox"
+						th:value="${ingridient.id}"/>
+					<span th:text="${ingridient.name}">ING</span>
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<div>
+				<h3>What veggies do you want?</h3>
+				<div th:each="ingridient:${veggies}">
+					<input th:field="*{ingridients}" type = "checkbox"
+						th:value="${ingridient.id}"/>
+					<span th:text="${ingridient.name}">ING</span>
+				</div>
+			</div>
+		</div>
+		
+		<div>
+			<div>
+				<h3>Select your sauce!</h3>
+				<div th:each="ingridient:${sauce}">
+					<input th:field="*{ingridients}" type = "checkbox"
+						th:value="${ingridient.id}"/>
+					<span th:text="${ingridient.name}">ING</span>
+				</div>
+			</div>
+		</div>
+		
+		
+	</form>
+</body>
+</html>
