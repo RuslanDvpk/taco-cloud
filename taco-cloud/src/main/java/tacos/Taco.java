@@ -8,6 +8,6 @@ import lombok.Data;
 public class Taco {
 
 	private String name;
-	private List<Ingridient> ingridients;
+	private List<Ingredient> ingredients;
 	
 }

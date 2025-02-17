@@ -6,7 +6,7 @@
   
 </head>
 <body>
- 	<h1 align="center">Design tour taco!</h1>
+ 	<h1 align="center">Design your taco!</h1>
 	<p align="center">
 	<img th:src="@{/images/TacoCloud.png}" width="320" height="320" />
 	</p>
@@ -22,10 +22,10 @@
 		<div>
 			<div>
 				<h3>Designate your warp</h3>
-				<div th:each="ingridient:${wrap}">
-					<input th:field="*{ingridients}" type = "checkbox"
-						th:value="${ingridient.id}"/>
-					<span th:text="${ingridient.name}">ING</span>
+				<div th:each="ingredient:${wrap}">
+					<input th:field="*{ingredients}" type = "checkbox"
+						th:value="${ingredient.id}"/>
+					<span th:text="${ingredient.name}">ING</span>
 				</div>
 			</div>
 		</div>
@@ -33,10 +33,10 @@
 		<div>
 			<div>
 				<h3>Pick your protein</h3>
-				<div th:each="ingridient:${protein}">
-					<input th:field="*{ingridients}" type = "checkbox"
-						th:value="${ingridient.id}"/>
-					<span th:text="${ingridient.name}">ING</span>
+				<div th:each="ingredient:${protein}">
+					<input th:field="*{ingredients}" type = "checkbox"
+						th:value="${ingredient.id}"/>
+					<span th:text="${ingredient.name}">ING</span>
 				</div>
 			</div>
 		</div>
@@ -44,10 +44,10 @@
 		<div>
 			<div>
 				<h3>Choose your cheese</h3>
-				<div th:each="ingridient:${cheese}">
-					<input th:field="*{ingridients}" type = "checkbox"
-						th:value="${ingridient.id}"/>
-					<span th:text="${ingridient.name}">ING</span>
+				<div th:each="ingredient:${cheese}">
+					<input th:field="*{ingredients}" type = "checkbox"
+						th:value="${ingredient.id}"/>
+					<span th:text="${ingredient.name}">ING</span>
 				</div>
 			</div>
 		</div>
@@ -55,10 +55,10 @@
 		<div>
 			<div>
 				<h3>What veggies do you want?</h3>
-				<div th:each="ingridient:${veggies}">
-					<input th:field="*{ingridients}" type = "checkbox"
-						th:value="${ingridient.id}"/>
-					<span th:text="${ingridient.name}">ING</span>
+				<div th:each="ingredient:${veggies}">
+					<input th:field="*{ingredients}" type = "checkbox"
+						th:value="${ingredient.id}"/>
+					<span th:text="${ingredient.name}">ING</span>
 				</div>
 			</div>
 		</div>
@@ -66,10 +66,10 @@
 		<div>
 			<div>
 				<h3>Select your sauce!</h3>
-				<div th:each="ingridient:${sauce}">
-					<input th:field="*{ingridients}" type = "checkbox"
-						th:value="${ingridient.id}"/>
-					<span th:text="${ingridient.name}">ING</span>
+				<div th:each="ingredient:${sauce}">
+					<input th:field="*{ingredients}" type = "checkbox"
+						th:value="${ingredient.id}"/>
+					<span th:text="${ingredient.name}">ING</span>
 				</div>
 			</div>
 		</div>

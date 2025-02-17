@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Taco Cloud</title>
+  
+</head>
+<body>
+	<h1 align="center">Complete order of your taco creation</h3>
+	<p align="center">
+		<img th:src="@{/images/TacoCloud.png}" width="320" height="320" />
+	</p>
+	
+	<form method="POST" th:action="@{/orders}" th:object="${tacoOrder}">
+		
+		<h3>Your tacos in this order:</h3>
+		<a th:href="@{/design}">Design another taco!</a>
+		<ul>
+			<li th:each="taco : ${tacoOrder.tacos}">
+				<span th:text="${taco.name}">taco name</span>	
+				<ul>
+					<li th:each="ingredient : ${taco.ingredients}">
+						<span th:text="${ingredient.name}">taco name</span>						
+					</li>		
+				</ul>	
+				</br>	
+			</li>		
+		</ul>
+	
+	
+		<h2>Deliver to</h2>
+		<label for="deliveryName">Name: </label>
+		<input type="text" th:field="*{deliveryName}"/>
+		</br>
+		
+		<label for="deliveryStreet">Street: </label>
+		<input type="text" th:field="*{deliveryStreet}"/>
+		</br>
+		
+		<label for="deliveryCity">City: </label>
+		<input type="text" th:field="*{deliveryCity}"/>
+		</br>
+		
+		<label for="deliveryState">State: </label>
+		<input type="text" th:field="*{deliveryState}"/>
+		</br>
+		
+		<label for="deliveryZip">Zip: </label>
+		<input type="text" th:field="*{deliveryZip}"/>
+		</br>
+		
+	
+		<h2>Payment info</h2>
+		<label for="ccNumber">Credit card: </label>
+		<input type="text" th:field="*{ccNumber}"/>
+		</br>
+		
+		<label for="ccExpiration">Expiration: </label>
+		<input type="text" th:field="*{ccExpiration}"/>
+		</br>
+		
+		<label for="ccCVV">CVV: </label>
+		<input type="text" th:field="*{ccCVV}"/>
+		</br>
+		
+		<input type="submit" value="Submit order"/>
+	</form>
+	
+</body>
+</html>

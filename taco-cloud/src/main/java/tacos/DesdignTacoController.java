@@ -8,11 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lombok.extern.slf4j.Slf4j;
-import tacos.Ingridient.Type;
+import tacos.Ingredient.Type;
 
 @Slf4j
 @Controller
@@ -22,21 +23,21 @@ public class DesdignTacoController {
 
 	@ModelAttribute
 	public void addIngredientsToModel(Model model) {
-		List<Ingridient> ingridients = Arrays.asList(
-				new Ingridient("FLTO", "Flour tortilla", Type.WRAP),
-				new Ingridient("COTO", "Corn tortilla", Type.WRAP),
-				new Ingridient("GRBF", "Ground beef", Type.PROTEIN),
-				new Ingridient("CARN", "Carnitas", Type.PROTEIN),
-				new Ingridient("TMTO", "Diced Tomatoes", Type.VEGGIES),
-				new Ingridient("LETC", "Lettuce", Type.VEGGIES),
-				new Ingridient("CHED", "Cheddar", Type.CHEESE),
-				new Ingridient("JACK", "Monterrey Jack", Type.CHEESE),
-				new Ingridient("SLSA", "Salsa", Type.SAUCE),
-				new Ingridient("SRCR", "Sour Cream", Type.SAUCE)				
+		List<Ingredient> ingredients = Arrays.asList(
+				new Ingredient("FLTO", "Flour tortilla", Type.WRAP),
+				new Ingredient("COTO", "Corn tortilla", Type.WRAP),
+				new Ingredient("GRBF", "Ground beef", Type.PROTEIN),
+				new Ingredient("CARN", "Carnitas", Type.PROTEIN),
+				new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES),
+				new Ingredient("LETC", "Lettuce", Type.VEGGIES),
+				new Ingredient("CHED", "Cheddar", Type.CHEESE),
+				new Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
+				new Ingredient("SLSA", "Salsa", Type.SAUCE),
+				new Ingredient("SRCR", "Sour Cream", Type.SAUCE)				
 				);
-		Type[] types = Ingridient.Type.values();
+		Type[] types = Ingredient.Type.values();
 		for (Type type:types) {
-			model.addAttribute(type.toString().toLowerCase(), filterByType(ingridients, type));
+			model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
 		}
 	}
 	
@@ -55,8 +56,15 @@ public class DesdignTacoController {
 		return "design";
 	}
 	
-	private Iterable<Ingridient> filterByType(List<Ingridient> ingridients, Type type){
-		return ingridients.stream().filter(
+	@PostMapping
+	public String processTaco(Taco taco,
+			@ModelAttribute TacoOrder tacoOrder) {
+		tacoOrder.addTaco(taco);
+		log.info("Processing taco: {}", taco);
+		return "redirect:/orders/current";
+	}	
+	private Iterable<Ingredient> filterByType(List<Ingredient> ingredients, Type type){
+		return ingredients.stream().filter(
 				x->x.getType().equals(type)
 				).collect(Collectors.toList());
 				

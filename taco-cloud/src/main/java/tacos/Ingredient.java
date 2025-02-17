@@ -3,7 +3,7 @@ package tacos;
 import lombok.Data;
 
 @Data
-public class Ingridient {
+public class Ingredient {
 
 	private final String id;
 	private final String name;
